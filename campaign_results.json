@@ -1,60 +1,36 @@
 [
   {
     "business": {
-      "company_name": "Blackhawk | Digital Marketing Agency | Austin, TX",
-      "core_services": "Driven by a passion for innovative storytelling and strategic growth, Blackhawk provides comprehensive digital marketing services to its network of esteemed clients.",
-      "target_audience": "Texas-based businesses looking to increase their online presence and grow their customer base through effective digital marketing strategies.",
-      "identified_inefficiencies": [
-        "Poorly performing ad campaigns",
-        "Frustrated with inconsistent sales data"
+      "company_name": "Amazon",
+      "core_business": "E-commerce marketplace platform",
+      "operational_tasks": [
+        "Manually processing seller registration applications for basic compliance checks",
+        "Manually responding to seller inquiries via email for common platform issues"
       ],
-      "krykos_automation_hypothesis": "By leveraging our team's expertise in digital marketing, KRYKOS has developed a unique automation framework that streamlines the process of connecting potential customers with businesses like yours. Let us handle your digital marketing needs so you can focus on what matters most \u2013 growing your business.",
-      "source_url": "https://blackhawkdm.com/"
+      "automation_suggestion": "Automate seller registration compliance checks using AI to validate business documents and reduce manual review time by 40%",
+      "source_url": "https://sell.amazon.co.uk/sell-online"
     },
     "decision_maker": {
-      "Founder/CEO": [
-        {
-          "full_name": "David T. McLaughlin",
-          "linkedin_url": "https://www.linkedin.com/in/davidtmclaughlin",
-          "x_url": ""
-        }
-      ]
+      "full_name": "Jeffrey Preston Bezos",
+      "linkedin_url": "https://www.linkedin.com/in/jeff-bezos-879307323/",
+      "x_url": "https://x.com/jeffbezos"
     }
   },
   {
     "business": {
-      "company_name": "Award-Winning Digital Marketing Agency in Austin, TX",
-      "core_services": "Building a business can be hard, but with the help of Allegiant's Top Digital Marketing Agency in Your Corner, they make it Easier, More Predictable, and Last.",
-      "target_audience": "Business owners and contractors",
-      "identified_inefficiencies": [
-        "task 1",
-        "task 2"
+      "company_name": "Jeroboams",
+      "core_business": "Fine wine retail and exchange services",
+      "operational_pain_points": [
+        "Manually processing customer exchange requests via email for the Exchange Listings service",
+        "Manually tracking and following up with customers after they view high-intent product content (e.g., blog articles and buyer's picks)"
       ],
-      "krykos_automation_hypothesis": "The Krycos Automation Hypothesis",
-      "source_url": "https://allegiantdigital.com/"
+      "krykos_automation_hypothesis": "We noticed you handle exchange requests and content follow-ups manually. Krykos can deploy an AI agent that instantly processes exchange applications and auto-responds to high-intent content views with personalized offers, saving your customer service team 8+ hours weekly",
+      "source_url": "https://jeroboams.co.uk/"
     },
     "decision_maker": {
-      "full_name": "Chad Markham",
-      "linkedin_url": "https://www.linkedin.com/in/chadmarkham/",
-      "x_url": "https://home.x.com/"
-    }
-  },
-  {
-    "business": {
-      "company_name": "27 Best Austin, TX Digital Marketing Agencies | Expertise.com",
-      "core_services": "Digital marketing agency that serves businesses in Austin and Houston. Services include PPC and display advertising, email marketing, reputation management, content creation, SEO services, social media management.",
-      "target_audience": "Businesses in legal services, healthcare, distribution, construction, and a large number of other industries",
-      "identified_inefficiencies": [
-        "Digital marketing campaigns",
-        "Social media management"
-      ],
-      "krykos_automation_hypothesis": "",
-      "source_url": "https://www.expertise.com/business/digital-marketing-agencies/texas/austin"
-    },
-    "decision_maker": {
-      "full_name": "Jeff Weiner",
-      "linkedin_url": "https://www.linkedin.com/in/jweiner/",
-      "x_url": "https://www.x.com/"
+      "full_name": "Matt Tipping",
+      "linkedin_url": "https://www.linkedin.com/in/matt-tipping-0b3a1b4a",
+      "x_url": "https://twitter.com/MattTipping"
     }
   }
 ]

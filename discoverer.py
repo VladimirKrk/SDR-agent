@@ -1,17 +1,44 @@
 import os
 import time
-from duckduckgo_search import DDGS
+from ddgs import DDGS
 from urllib.parse import urlparse
 
 class LeadDiscoverer:
     def __init__(self):
-        # Expanded blacklist to filter out middle-men and directories
-        self.blacklist = [
+        self.blacklist_domains = [
             'clutch.co', 'yelp.com', 'linkedin.com', 'facebook.com', 
             'instagram.com', 'twitter.com', 'glassdoor.com', 'upwork.com',
-            'expert.com', 'directory', 'wikipedia.org', 'crunchbase.com',
-            'yellowpages.com', 'bbb.org', 'angis.com', 'houzz.com', 'thumbtack.com'
+            'expert.com', 'wikipedia.org', 'crunchbase.com',
+            'yellowpages.com', 'bbb.org', 'angis.com', 'houzz.com', 'thumbtack.com',
+            'expertise.com', 'upcity.com', 'designrush.com', 
+            'goodfirms.co', 'sortlist.com', 'topagencies', 'bestagencies', 
+            'agencies.com', 'directory', 'listing', 'review',
+            'builtinaustin.com', 'nogood.io', 'writingstudio.com',
+            'medium.com', 'hubspot.com', 'wordpress.com',
+            'zhihu.com', 'quora.com', 'reddit.com', 'stackoverflow.com',
+            'youtube.com', 'vimeo.com', 'slideshare.net', 'issuu.com'
         ]
+        
+        self.path_blacklist = [
+            '/blog/', '/articles/', '/news/', '/post/', 
+            '/list/', '/top-', '/best-', '/directory/', '/review/',
+            '/question/', '/answer/', '/topic/'
+        ]
+
+    def is_blacklisted(self, url):
+        parsed = urlparse(url)
+        domain = parsed.netloc.lower()
+        path = parsed.path.lower()
+        
+        for b in self.blacklist_domains:
+            if b in domain:
+                return True
+        
+        for p in self.path_blacklist:
+            if p in path:
+                return True
+        
+        return False
 
     def find_companies(self, niche_query, count=3):
         print(f"[*] Discoverer: Searching via Stable HTML for '{niche_query}'...")
@@ -19,17 +46,14 @@ class LeadDiscoverer:
         
         try:
             with DDGS() as ddgs:
-                # Using the stable 'html' backend from version 6.1.0
-                # We also explicitly set region to 'us-en'
-                search_query = f"{niche_query} official website"
+                search_query = f"{niche_query} official website -zhihu.com -quora.com -reddit.com -youtube.com"
                 
-                # Fetch slightly more results than needed to account for the blacklist
                 search_results = ddgs.text(
                     search_query, 
                     region='us-en', 
                     safesearch='off', 
                     backend='html', 
-                    max_results=count + 5
+                    max_results=count + 10
                 )
                 
                 if not search_results:
@@ -38,20 +62,18 @@ class LeadDiscoverer:
 
                 for r in search_results:
                     url = r.get('href')
-                    if not url: continue
-                    
-                    domain = urlparse(url).netloc.lower()
-                    
-                    # 1. Skip if domain is in blacklist
-                    if any(b in domain for b in self.blacklist):
+                    title = r.get('title', '')
+                    if not url:
                         continue
-                        
-                    # 2. Skip if we already have this URL
+                    
+                    if self.is_blacklisted(url):
+                        continue
+                    
                     if url in [c['url'] for c in companies]:
                         continue
 
                     companies.append({
-                        "name": r.get('title', 'Unknown'),
+                        "name": title,
                         "url": url
                     })
                     
