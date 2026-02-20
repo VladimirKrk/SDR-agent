@@ -1,6 +1,6 @@
 import os
 import time
-from ddgs import DDGS
+from duckduckgo_search import DDGS
 from urllib.parse import urlparse
 
 class LeadDiscoverer:
@@ -16,7 +16,9 @@ class LeadDiscoverer:
             'builtinaustin.com', 'nogood.io', 'writingstudio.com',
             'medium.com', 'hubspot.com', 'wordpress.com',
             'zhihu.com', 'quora.com', 'reddit.com', 'stackoverflow.com',
-            'youtube.com', 'vimeo.com', 'slideshare.net', 'issuu.com'
+            'youtube.com', 'vimeo.com', 'slideshare.net', 'issuu.com', 'clutch.co', 'expertise.com', 'yelp.com', 'linkedin.com', 'facebook.com', 
+            'instagram.com', 'twitter.com', 'glassdoor.com', 'upwork.com', 'bbb.org',
+            'yellowpages.com', 'angis.com', 'houzz.com', 'thumbtack.com', 'zillow.com', 'realtor.com'
         ]
         
         self.path_blacklist = [
@@ -41,47 +43,54 @@ class LeadDiscoverer:
         return False
 
     def find_companies(self, niche_query, count=3):
-        print(f"[*] Discoverer: Searching via Stable HTML for '{niche_query}'...")
-        companies = []
+        # SIMPLIFIED QUERY: Just the niche + "official website"
+        # We removed the hard quotes and multiple -site operators to get more results
+        search_query = f'{niche_query} official website'
+        
+        print(f"[*] Discoverer: Searching for '{niche_query}'...")
+        potential_leads = []
         
         try:
             with DDGS() as ddgs:
-                search_query = f"{niche_query} official website -zhihu.com -quora.com -reddit.com -youtube.com"
-                
                 search_results = ddgs.text(
                     search_query, 
                     region='us-en', 
-                    safesearch='off', 
                     backend='html', 
-                    max_results=count + 10
+                    max_results=40 # Grab a decent pool
                 )
                 
                 if not search_results:
-                    print("[!] No results returned from search engine.")
+                    print("[!] DuckDuckGo returned zero raw results. Try a broader niche.")
                     return []
 
                 for r in search_results:
-                    url = r.get('href')
-                    title = r.get('title', '')
-                    if not url:
+                    url = r.get('href', '').lower()
+                    title = r.get('title', '').lower()
+                    domain = urlparse(url).netloc
+                    
+                    # DEBUG: Let's see what's being rejected
+                    
+                    # 1. Filter Directories
+                    if any(b in domain for b in self.blacklist_domains):
+                        # print(f"   [x] Skipping directory: {domain}")
                         continue
                     
-                    if self.is_blacklisted(url):
+                    # 2. Filter Listicles/Blogs based on Title
+                    if any(x in title for x in ['top ', 'best ', '10 ', '20 ', 'reviews']):
+                        # print(f"   [x] Skipping listicle title: {title[:30]}")
                         continue
-                    
-                    if url in [c['url'] for c in companies]:
+                        
+                    # 3. Filter specific path garbage but be careful
+                    if any(x in url for x in ['/directory/', '/category/', '/tags/']):
                         continue
 
-                    companies.append({
-                        "name": title,
+                    potential_leads.append({
+                        "name": r.get('title', 'Unknown'),
                         "url": url
                     })
-                    
-                    if len(companies) >= count:
-                        break
                         
         except Exception as e:
             print(f"[!] Discoverer Search Error: {e}")
         
-        print(f"[+] Discoverer: Found {len(companies)} potential targets.")
-        return companies
+        print(f"[+] Discoverer: Found {len(potential_leads)} potential leads to audit.")
+        return potential_leads

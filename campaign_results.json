@@ -1,36 +1,64 @@
 [
   {
     "business": {
-      "company_name": "Amazon",
-      "core_business": "E-commerce marketplace platform",
-      "operational_tasks": [
-        "Manually processing seller registration applications for basic compliance checks",
-        "Manually responding to seller inquiries via email for common platform issues"
+      "is_qualified_business": true,
+      "reason_for_disqualification": "",
+      "company_name": "Zozimus",
+      "core_business": "Zozimus is a Boston-based agency that provides strategic consulting, including creative solutions, digital marketing, paid media, search engine optimization (SEO), and public relations to help clients achieve their business goals with the use of cutting-edge AI analysis.",
+      "operational_pain_points": [
+        "Navigating through multiple pages and images might be challenging for some users seeking specific service information",
+        "Detailed descriptions of each core service are missing or need further elaboration"
       ],
-      "automation_suggestion": "Automate seller registration compliance checks using AI to validate business documents and reduce manual review time by 40%",
-      "source_url": "https://sell.amazon.co.uk/sell-online"
+      "krykos_automation_hypothesis": "By automating the qualification process, we can quickly determine which clients have specific needs that align with Zozimus's services. This enhances the efficiency in reaching out to potential new clients and delivering tailored proposals based on their unique challenges.",
+      "source_url": "https://zozimus.com/"
     },
     "decision_maker": {
-      "full_name": "Jeffrey Preston Bezos",
-      "linkedin_url": "https://www.linkedin.com/in/jeff-bezos-879307323/",
-      "x_url": "https://x.com/jeffbezos"
+      "full_name": "Unknown",
+      "x_url": "",
+      "linkedin_url": "https://www.linkedin.com/in/ajgerritson",
+      "found_via": "search"
     }
   },
   {
     "business": {
-      "company_name": "Jeroboams",
-      "core_business": "Fine wine retail and exchange services",
+      "is_qualified_business": true,
+      "reason_for_disqualification": null,
+      "company_name": "Brick Marketing",
+      "core_business": "Brick Marketing provides goal-aligned digital marketing services, training, and consulting to various types of businesses including B2B software companies, manufacturing suppliers, architecture firms, design agencies, SaaS companies, healthcare technology suppliers, IT companies, and logistics companies.",
       "operational_pain_points": [
-        "Manually processing customer exchange requests via email for the Exchange Listings service",
-        "Manually tracking and following up with customers after they view high-intent product content (e.g., blog articles and buyer's picks)"
+        "Understanding your business goals",
+        "Challenges in digital marketing execution",
+        "Need for personalized, collaborative agency experience"
       ],
-      "krykos_automation_hypothesis": "We noticed you handle exchange requests and content follow-ups manually. Krykos can deploy an AI agent that instantly processes exchange applications and auto-responds to high-intent content views with personalized offers, saving your customer service team 8+ hours weekly",
-      "source_url": "https://jeroboams.co.uk/"
+      "krykos_automation_hypothesis": "Brick Marketing's combination of expert digital marketing services, training, and consulting solutions can significantly improve a business's online presence, driving sales, leads, and qualified traffic through strategic implementation. By leveraging Krykos' automation tools, we hypothesize that Brick Marketing could further streamline their processes to deliver clients even more efficient and effective results.",
+      "source_url": "https://www.brickmarketing.com/"
     },
     "decision_maker": {
-      "full_name": "Matt Tipping",
-      "linkedin_url": "https://www.linkedin.com/in/matt-tipping-0b3a1b4a",
-      "x_url": "https://twitter.com/MattTipping"
+      "full_name": "Unknown",
+      "x_url": "",
+      "linkedin_url": "",
+      "found_via": "search"
+    }
+  },
+  {
+    "business": {
+      "is_qualified_business": true,
+      "reason_for_disqualification": null,
+      "company_name": "InSegment",
+      "core_business": "Digital marketing services including business intelligence, creative services, website development, and lead generation for various industries like financial institutions, higher education, non-profits, retail eCommerce, and tech firms.",
+      "operational_pain_points": [
+        "Integrating strategy with creativity",
+        "Tailoring solutions to unique client needs",
+        "Generating high-impact marketing results through a meticulous engineering process"
+      ],
+      "krykos_automation_hypothesis": "InSegment could leverage automation tools to streamline their digital services, allowing for more efficient scaling of operations and providing faster turnaround times for clients. This would not only enhance the service delivery but also ensure that InSegment can maintain its high standards of innovation while handling larger client bases.",
+      "source_url": "https://www.insegment.com/agency/boston-digital-marketing/"
+    },
+    "decision_maker": {
+      "full_name": "Unknown",
+      "x_url": "",
+      "linkedin_url": "",
+      "found_via": "search"
     }
   }
 ]

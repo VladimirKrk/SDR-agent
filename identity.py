@@ -1,64 +1,66 @@
-import os, json, time
-from ddgs import DDGS
+import os, json, time, random
+from duckduckgo_search import DDGS
 from openai import OpenAI
+import requests
 
 class IdentityHunter:
     def __init__(self):
-        self.ai = OpenAI(api_key=os.getenv("OLLAMA_API_KEY", "ollama"), base_url=os.getenv("OLLAMA_BASE_URL"))
-        self.model = os.getenv("OLLAMA_MODEL", "llama3")
+        self.ai = OpenAI(api_key=os.getenv("OLLAMA_API_KEY", "ollama"), base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434/v1"))
+        self.model = os.getenv("OLLAMA_MODEL", "qwen2.5:7b")
 
-    def _clean_url(self, url):
-        if not url or "null" in url or "home.x.com" in url or "login" in url:
-            return ""
-        return url
-
-    def find_decision_maker(self, company_name, site_context):
-        print(f"[*] Identity Hunter: Looking for names inside {company_name}'s website...")
-        
-        extract_prompt = f"""
-        Analyze this website text from {company_name}. Find the Full Name and Title of the Founder, CEO, or Owner.
-        Text: {site_context[:5000]}
-        Return JSON: {{"name": "Name or null", "title": "Title or null"}}
-        """
-        
-        name_on_site = "null"
+    def validate_url(self, url):
+        """IMPROVEMENT 2: Mandatory URL Validation"""
+        if not url or "http" not in url: return ""
         try:
-            res = self.ai.chat.completions.create(
-                model=self.model,
-                messages=[{"role": "user", "content": extract_prompt}],
-                response_format={'type': 'json_object'}
-            )
-            data = json.loads(res.choices[0].message.content)
-            name_on_site = data.get("name")
-        except: 
-            pass
+            # We use a real User-Agent to avoid being blocked by X during a ping
+            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+            response = requests.get(url, headers=headers, timeout=5)
+            # If 404 or "This account doesn't exist" in text, it's garbage
+            if response.status_code == 404 or "account doesn't exist" in response.text.lower():
+                return ""
+            return url
+        except:
+            return url # Fallback if request fails but we aren't sure
 
-        if name_on_site and name_on_site != "null":
-            print(f"[*] Hunter: Verifying socials for {name_on_site}...")
-            query = f'"{name_on_site}" {company_name} LinkedIn X'
+    def find_decision_maker(self, company_name, site_context, site_socials):
+        # Priority 1: Use what we found directly on the site
+        if site_socials.get("x_from_site") or site_socials.get("li_from_site"):
+            print(f"   [+] Found socials directly on website footer.")
+
+        # Step 1: Extract name
+        extract_prompt = f"Analyze site text for {company_name}. Find the Founder/CEO. If not found, return 'Unknown'. Text: {site_context[:4000]}"
+        try:
+            res = self.ai.chat.completions.create(model=self.model, messages=[{"role": "user", "content": extract_prompt}], response_format={'type': 'json_object'})
+            full_name = json.loads(res.choices[0].message.content).get("name", "Unknown")
+        except: full_name = "Unknown"
+
+        # Step 2: Formulate Search Query
+        # If we have a name, search for person. If not, search for company profile.
+        if full_name != "Unknown" and full_name is not None:
+            query = f'site:x.com "{full_name}" {company_name}'
         else:
-            print(f"[*] Hunter: No name on site. Searching web for {company_name} leadership...")
-            query = f"{company_name} Founder CEO owner LinkedIn -NHL -Sports -Hockey"
+            query = f'site:x.com {company_name} official profile'
 
+        # Step 3: Search and Merge
         try:
+            time.sleep(random.uniform(2, 4))
             with DDGS() as ddgs:
-                results = list(ddgs.text(query, region='us-en', backend='html', max_results=5))
+                results = list(ddgs.text(query, region='us-en', backend='html', max_results=3))
                 search_text = "\n".join([f"{r['href']} - {r['body']}" for r in results])
                 
-                final_prompt = f"""
-                Identify the Founder/CEO LinkedIn and X.com URLs. 
-                Company: {company_name}
-                Context: {search_text}
-                Return JSON: {{"full_name": "Name", "linkedin_url": "URL", "x_url": "URL"}}
-                """
-                res = self.ai.chat.completions.create(
+                final_res = self.ai.chat.completions.create(
                     model=self.model,
-                    messages=[{"role": "user", "content": final_prompt}],
+                    messages=[{"role": "user", "content": f"Find X and LinkedIn links for {full_name} at {company_name}. Results: {search_text}"}],
                     response_format={'type': 'json_object'}
                 )
-                data = json.loads(res.choices[0].message.content)
-                data['linkedin_url'] = self._clean_url(data.get('linkedin_url', ''))
-                data['x_url'] = self._clean_url(data.get('x_url', ''))
-                return data
-        except Exception as e:
-            return {"error": str(e)}
+                data = json.loads(final_res.choices[0].message.content)
+                
+                # Combine site footer links with search links (Footer links are usually more reliable)
+                return {
+                    "full_name": full_name,
+                    "x_url": site_socials.get("x_from_site") or data.get("x_url", ""),
+                    "linkedin_url": site_socials.get("li_from_site") or data.get("linkedin_url", ""),
+                    "found_via": "footer" if site_socials.get("x_from_site") else "search"
+                }
+        except:
+            return {"full_name": full_name, "x_url": site_socials.get("x_from_site"), "linkedin_url": site_socials.get("li_from_site")}
