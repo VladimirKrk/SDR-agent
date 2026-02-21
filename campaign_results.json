@@ -1,64 +1,24 @@
 [
   {
-    "business": {
-      "is_qualified_business": true,
-      "reason_for_disqualification": "",
-      "company_name": "Zozimus",
-      "core_business": "Zozimus is a Boston-based agency that provides strategic consulting, including creative solutions, digital marketing, paid media, search engine optimization (SEO), and public relations to help clients achieve their business goals with the use of cutting-edge AI analysis.",
-      "operational_pain_points": [
-        "Navigating through multiple pages and images might be challenging for some users seeking specific service information",
-        "Detailed descriptions of each core service are missing or need further elaboration"
-      ],
-      "krykos_automation_hypothesis": "By automating the qualification process, we can quickly determine which clients have specific needs that align with Zozimus's services. This enhances the efficiency in reaching out to potential new clients and delivering tailored proposals based on their unique challenges.",
-      "source_url": "https://zozimus.com/"
-    },
-    "decision_maker": {
-      "full_name": "Unknown",
-      "x_url": "",
-      "linkedin_url": "https://www.linkedin.com/in/ajgerritson",
-      "found_via": "search"
-    }
+    "Company": "CPI",
+    "Decision Maker": "Unknown",
+    "Website": "https://www.cpiny.com/",
+    "X Profile": "",
+    "LinkedIn": "",
+    "Email Subject": "Client representation efficiency",
+    "Email Body": "I was looking at your site and noticed how you compete with other entrepreneurial firms for client representation. We built an AI agent that automates candidate sourcing and client communication, saving your team time on administrative tasks. Mind if I send over a 30-second video demo?\n\nBest, Krykos Team",
+    "Hypothesis": "CPI can optimize its candidate sourcing and client communication processes through automation, allowing the team to focus more on high-skill tasks such as strategic advising and recruitment.",
+    "Pain Points": "Competing with other entrepreneurial firms seeking to represent clients"
   },
   {
-    "business": {
-      "is_qualified_business": true,
-      "reason_for_disqualification": null,
-      "company_name": "Brick Marketing",
-      "core_business": "Brick Marketing provides goal-aligned digital marketing services, training, and consulting to various types of businesses including B2B software companies, manufacturing suppliers, architecture firms, design agencies, SaaS companies, healthcare technology suppliers, IT companies, and logistics companies.",
-      "operational_pain_points": [
-        "Understanding your business goals",
-        "Challenges in digital marketing execution",
-        "Need for personalized, collaborative agency experience"
-      ],
-      "krykos_automation_hypothesis": "Brick Marketing's combination of expert digital marketing services, training, and consulting solutions can significantly improve a business's online presence, driving sales, leads, and qualified traffic through strategic implementation. By leveraging Krykos' automation tools, we hypothesize that Brick Marketing could further streamline their processes to deliver clients even more efficient and effective results.",
-      "source_url": "https://www.brickmarketing.com/"
-    },
-    "decision_maker": {
-      "full_name": "Unknown",
-      "x_url": "",
-      "linkedin_url": "",
-      "found_via": "search"
-    }
-  },
-  {
-    "business": {
-      "is_qualified_business": true,
-      "reason_for_disqualification": null,
-      "company_name": "InSegment",
-      "core_business": "Digital marketing services including business intelligence, creative services, website development, and lead generation for various industries like financial institutions, higher education, non-profits, retail eCommerce, and tech firms.",
-      "operational_pain_points": [
-        "Integrating strategy with creativity",
-        "Tailoring solutions to unique client needs",
-        "Generating high-impact marketing results through a meticulous engineering process"
-      ],
-      "krykos_automation_hypothesis": "InSegment could leverage automation tools to streamline their digital services, allowing for more efficient scaling of operations and providing faster turnaround times for clients. This would not only enhance the service delivery but also ensure that InSegment can maintain its high standards of innovation while handling larger client bases.",
-      "source_url": "https://www.insegment.com/agency/boston-digital-marketing/"
-    },
-    "decision_maker": {
-      "full_name": "Unknown",
-      "x_url": "",
-      "linkedin_url": "",
-      "found_via": "search"
-    }
+    "Company": "24 Seven Talant",
+    "Decision Maker": "Unknown",
+    "Website": "https://www.24seventalent.com/contact-us/new-york/",
+    "X Profile": "",
+    "LinkedIn": "",
+    "Email Subject": "Managing multiple office networks",
+    "Email Body": "I was looking at your site and noticed the challenge of managing recruitment across multiple offices and markets.\nWe built an AI agent that automates exactly this, saving significant time on job listings and candidate sourcing.\nMind if I send over a 30-second video demo?\n\nBest, Krykos Team",
+    "Hypothesis": "24 Seven Talant can leverage Kry Kos automation tools to streamline job listing management, candidate sourcing, and client communication processes. This would enhance efficiency and allow the agency to focus on higher-value tasks such as consultative recruitment and building relationships with clients.",
+    "Pain Points": "Expanding recruitment presence in new markets, Managing a large network of offices and staff, Competing with other recruitment agencies for top talent"
   }
 ]
