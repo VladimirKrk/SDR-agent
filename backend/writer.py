@@ -56,9 +56,9 @@ class EmailDrafter:
         
         Noticed you're capturing leads via the site but likely handling the CRM entry manually.
         
-        We built an agent that automates that handoff entirely—no human data entry needed.
+        I design custom AI agents to automate that handoff entirely—no human data entry needed.
         
-        Mind if I send over a 30-second video showing how it works?
+        If I mocked up a quick prototype for {company_name}, would you be open to seeing it?
         
         Best,
         Krykos Team
@@ -68,9 +68,9 @@ class EmailDrafter:
         
         I was testing your inquiry flow and noticed there’s no instant booking option. In your industry, speed usually dictates conversion.
         
-        We deploy 24/7 AI agents that qualify and book these leads instantly, so you stop losing deals to lag time.
+        I build 24/7 AI concierges that qualify and book these leads instantly, so you stop losing deals to lag time.
         
-        Open to seeing a quick demo?
+        Mind if I build a quick demo for your site to show you how it works?
         
         Best,
         Krykos Team
@@ -80,9 +80,9 @@ class EmailDrafter:
         
         I've been following {company_name} and noticed the team is growing.
         
-        Usually, at this stage, operational drag (admin, triage, scheduling) starts eating into strategy time. We build custom "AI Employees" to take that grunt work off your plate.
+        Usually, at this stage, operational drag (admin, triage, scheduling) starts eating into strategy time. I build custom "AI Employees" to take that grunt work off your plate.
         
-        Would you be opposed to seeing how we helped a similar agency automate this?
+        Would you be opposed to seeing how I helped a similar agency automate this?
         
         Best,
         Krykos Team
